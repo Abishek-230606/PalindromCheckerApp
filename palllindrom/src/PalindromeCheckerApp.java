@@ -46,6 +46,6 @@ public class PalindromeCheckerApp {
         }
 
         if (flag)  System.out.println("The string " + Palindrome + " is a palindrome.");
-        else System.out.println("The string " + Palindrome + " is not a palindrome.");
+        else System.out.println("The string " + Palindrome + " is not a palindrome .");
     }
 }

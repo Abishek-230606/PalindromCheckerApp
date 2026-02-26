@@ -1,6 +1,6 @@
 /** MAIN CLASS - UseCase5PalindromeCheckerApp
 
-Use Case 5: Stack Based Palindrome Checker
+Use Case 6: Stack and queue Based Palindrome Checker
 
 * Description:
         * This class validates a palindrome using a Stack
@@ -15,31 +15,36 @@ Use Case 5: Stack Based Palindrome Checker
 * This maps stack behavior to reversal Logic.
 
 * @Author Abishek JS
-* @version 5.0
+* @version 6.0
 **/
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 public class PalindromeCheckerApp {
     public static void main(String[] args) {
 
         System.out.println("WELCOME TO PALINDROME CHECKER APP MANAGEMENT SYSTEM");
-        System.out.println("version:5.0");
+        System.out.println("version:6.0");
         System.out.println("System instanced successful");
         System.out.println();
 
         String Palindrome = "racecar";
         boolean flag=true;
         Stack<Character> stack = new Stack<>();
+        Queue<Character> queue = new LinkedList<>();
 
         for(int i=0;i<Palindrome.length();i++)
         {
             stack.push(Palindrome.charAt(i));
+            queue.add(Palindrome.charAt(i));
         }
 
         for(int i=0;i<Palindrome.length();i++)
         {
-            char ch = stack.pop();
+            char chs = stack.pop();
+            char chq = queue.remove();
 
-            if(Palindrome.charAt(i)!=ch)
+            if(Palindrome.charAt(i)!=chs && Palindrome.charAt(i)!=chq)
             {
                 flag = false;
             }

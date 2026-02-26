@@ -3,7 +3,7 @@
  * MAIN CLASS - UseCase1PalindromeApp
  * ============================================================
  *
- * Use Case 1: Application Entry & Welcome Message
+ * Use Case 4: Application Entry & Welcome Message
  *
  * Description:
  * This class represents the entry point of the
@@ -18,21 +18,34 @@
  *
  * The goal is to establish a clear startup flow.
  *
- * @author Oreoz
- * @version 1.0
+ * @author Abishek JS
+ * @version 4.0
  */
 
 public class PalindromeCheckerApp {
-    public static void main(String[] args){
-        String phrase = "Sajani";
-        String newphrase = "";
-        int i,n;
-        n = phrase.length();
-        for(i=n-1;i>=0;i--)
-        {
-            newphrase += phrase.charAt(i);
+    public static void main(String[] args) {
+
+        System.out.println("WELCOME TO PALINDROME CHECKER APP MANAGEMENT SYSTEM");
+        System.out.println("version:4.0");
+        System.out.println("System instanced successful");
+        System.out.println();
+
+        String Palindrome = "racecar";
+        char[] chars = Palindrome.toCharArray();
+
+        boolean flag = true;
+        int start = 0, end = Palindrome.length()-1;
+
+        while (start < end){
+            if(chars[start] != chars[end]){
+                flag = false;
+                break;
+            }
+            start ++;
+            end --;
         }
-        System.out.println("the orginal string is : "+phrase);
-        System.out.println("the reversed string is : "+newphrase);
+
+        if (flag)  System.out.println("The string " + Palindrome + " is a palindrome.");
+        else System.out.println("The string " + Palindrome + " is not a palindrome.");
     }
 }

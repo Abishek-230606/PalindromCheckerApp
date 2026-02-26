@@ -1,1 +1,4 @@
-# pallindromCheckerApp
+# PalindromCheckerApp
+
+# THIS IS THE MINI PROJECT - PALINDROM CHECKER APP 
+- AUHOR ABISHEK JS

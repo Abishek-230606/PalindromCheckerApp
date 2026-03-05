@@ -1,14 +1,20 @@
 /**
  * MAIN CLASS - PalindromeCheckerApp
  *
- * Use Case 12: Strategy Pattern for Palindrome Algorithm
+ * Use Case 13: Performance Checker for Palindrome Algorithms
  *
  * Description:
- * Demonstrates Strategy Design Pattern where different
- * palindrome algorithms can be used interchangeably.
+ * This application measures the execution time of different
+ * palindrome algorithms using the Strategy Pattern.
+ *
+ * The application:
+ * - Selects a palindrome checking strategy
+ * - Executes the algorithm
+ * - Measures execution time
+ * - Displays the result and performance
  *
  * @Author Abishek JS
- * @Version 12.0
+ * @Version 13.0
  */
 
 import java.util.ArrayDeque;
@@ -19,25 +25,19 @@ public class PalindromeCheckerApp {
     public static void main(String[] args) {
 
         System.out.println("WELCOME TO PALINDROME CHECKER APP MANAGEMENT SYSTEM");
-        System.out.println("Version: 12.0");
-        System.out.println("Strategy Pattern Initialized");
+        System.out.println("Version: 13.0");
+        System.out.println("Performance Checker Initialized");
         System.out.println();
 
         String input = "madam";
 
-        // Choose strategy
+        // Choose algorithm strategy
         PalindromeStrategy strategy = new TwoPointerPalindromeStrategy();
         // PalindromeStrategy strategy = new DequePalindromeStrategy();
 
         PalindromeService service = new PalindromeService(strategy);
 
-        boolean result = service.checkPalindrome(input);
-
-        if (result) {
-            System.out.println(input + " is a palindrome.");
-        } else {
-            System.out.println(input + " is not a palindrome.");
-        }
+        PerformanceChecker.measurePerformance(service, input);
     }
 }
 
@@ -108,5 +108,28 @@ class PalindromeService {
 
     public boolean checkPalindrome(String input) {
         return strategy.isPalindrome(input);
+    }
+}
+
+/* Performance Checker Class */
+class PerformanceChecker {
+
+    public static void measurePerformance(PalindromeService service, String input) {
+
+        long startTime = System.nanoTime();
+
+        boolean result = service.checkPalindrome(input);
+
+        long endTime = System.nanoTime();
+
+        long executionTime = endTime - startTime;
+
+        if (result) {
+            System.out.println(input + " is a palindrome.");
+        } else {
+            System.out.println(input + " is not a palindrome.");
+        }
+
+        System.out.println("Execution Time: " + executionTime + " nanoseconds");
     }
 }

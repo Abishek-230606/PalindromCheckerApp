@@ -1,27 +1,53 @@
 /**
  * MAIN CLASS - PalindromeCheckerApp
  *
- * Use Case 11: object-oriented Palindrome Checker
+ * Use Case 12: Strategy Pattern for Palindrome Algorithm
  *
  * Description:
- * This class validates whether a string is a palindrome using
- * a Deque (Double Ended Queue) data structure.
- *
- * The application:
- * - Adds characters to a deque
- * - Removes characters from both ends
- * - Compares them
- * - Displays the result
+ * Demonstrates Strategy Design Pattern where different
+ * palindrome algorithms can be used interchangeably.
  *
  * @Author Abishek JS
- * @Version 11.0
+ * @Version 12.0
  */
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
 
 public class PalindromeCheckerApp {
+
+    public static void main(String[] args) {
+
+        System.out.println("WELCOME TO PALINDROME CHECKER APP MANAGEMENT SYSTEM");
+        System.out.println("Version: 12.0");
+        System.out.println("Strategy Pattern Initialized");
+        System.out.println();
+
+        String input = "madam";
+
+        // Choose strategy
+        PalindromeStrategy strategy = new TwoPointerPalindromeStrategy();
+        // PalindromeStrategy strategy = new DequePalindromeStrategy();
+
+        PalindromeService service = new PalindromeService(strategy);
+
+        boolean result = service.checkPalindrome(input);
+
+        if (result) {
+            System.out.println(input + " is a palindrome.");
+        } else {
+            System.out.println(input + " is not a palindrome.");
+        }
+    }
+}
+
+/* Strategy Interface */
+interface PalindromeStrategy {
+    boolean isPalindrome(String input);
+}
+
+/* Strategy 1: Two Pointer Algorithm */
+class TwoPointerPalindromeStrategy implements PalindromeStrategy {
 
     public boolean isPalindrome(String input) {
 
@@ -42,24 +68,45 @@ public class PalindromeCheckerApp {
 
         return true;
     }
+}
 
-    public static void main(String[] args) {
+/* Strategy 2: Deque Algorithm */
+class DequePalindromeStrategy implements PalindromeStrategy {
 
-        System.out.println("WELCOME TO PALINDROME CHECKER APP MANAGEMENT SYSTEM");
-        System.out.println("Version: 11.0");
-        System.out.println("System instantiated successfully");
-        System.out.println();
+    public boolean isPalindrome(String input) {
 
-        String input = "madam";
+        input = input.toLowerCase();
 
-        PalindromeCheckerApp service = new PalindromeCheckerApp();
+        Deque<Character> deque = new ArrayDeque<>();
 
-        boolean result = service.isPalindrome(input);
-
-        if (result) {
-            System.out.println(input + " is a palindrome.");
-        } else {
-            System.out.println(input + " is not a palindrome.");
+        for (char c : input.toCharArray()) {
+            deque.addLast(c);
         }
+
+        while (deque.size() > 1) {
+
+            char first = deque.removeFirst();
+            char last = deque.removeLast();
+
+            if (first != last) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+}
+
+/* Context Class */
+class PalindromeService {
+
+    private PalindromeStrategy strategy;
+
+    public PalindromeService(PalindromeStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public boolean checkPalindrome(String input) {
+        return strategy.isPalindrome(input);
     }
 }

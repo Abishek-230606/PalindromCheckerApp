@@ -1,7 +1,7 @@
 /**
  * MAIN CLASS - PalindromeCheckerApp
  *
- * Use Case 10: Reccursive Palindrome Checker
+ * Use Case 11: object-oriented Palindrome Checker
  *
  * Description:
  * This class validates whether a string is a palindrome using
@@ -14,7 +14,7 @@
  * - Displays the result
  *
  * @Author Abishek JS
- * @Version 10.0
+ * @Version 11.0
  */
 
 import java.util.ArrayDeque;
@@ -22,33 +22,39 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 public class PalindromeCheckerApp {
-    public static boolean isPalindrome(String str, int left, int right) {
 
-        // Base case: if pointers cross, it is a palindrome
-        if (left >= right) {
-            return true;
+    public boolean isPalindrome(String input) {
+
+        input = input.toLowerCase();
+
+        int left = 0;
+        int right = input.length() - 1;
+
+        while (left < right) {
+
+            if (input.charAt(left) != input.charAt(right)) {
+                return false;
+            }
+
+            left++;
+            right--;
         }
 
-        // If characters do not match
-        if (str.charAt(left) != str.charAt(right)) {
-            return false;
-        }
-
-        // Recursive call
-        return isPalindrome(str, left + 1, right - 1);
+        return true;
     }
-
 
     public static void main(String[] args) {
 
         System.out.println("WELCOME TO PALINDROME CHECKER APP MANAGEMENT SYSTEM");
-        System.out.println("Version: 10.0");
+        System.out.println("Version: 11.0");
         System.out.println("System instantiated successfully");
         System.out.println();
 
         String input = "madam";
 
-        boolean result = isPalindrome(input, 0, input.length() - 1);
+        PalindromeCheckerApp service = new PalindromeCheckerApp();
+
+        boolean result = service.isPalindrome(input);
 
         if (result) {
             System.out.println(input + " is a palindrome.");

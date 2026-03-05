@@ -1,7 +1,7 @@
 /**
  * MAIN CLASS - PalindromeCheckerApp
  *
- * Use Case 9: Normalized Palindrome Checker
+ * Use Case 10: Reccursive Palindrome Checker
  *
  * Description:
  * This class validates whether a string is a palindrome using
@@ -14,7 +14,7 @@
  * - Displays the result
  *
  * @Author Abishek JS
- * @Version 8.0
+ * @Version 10.0
  */
 
 import java.util.ArrayDeque;
@@ -22,39 +22,38 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 public class PalindromeCheckerApp {
+    public static boolean isPalindrome(String str, int left, int right) {
+
+        // Base case: if pointers cross, it is a palindrome
+        if (left >= right) {
+            return true;
+        }
+
+        // If characters do not match
+        if (str.charAt(left) != str.charAt(right)) {
+            return false;
+        }
+
+        // Recursive call
+        return isPalindrome(str, left + 1, right - 1);
+    }
+
 
     public static void main(String[] args) {
 
         System.out.println("WELCOME TO PALINDROME CHECKER APP MANAGEMENT SYSTEM");
-        System.out.println("Version: 9.0");
+        System.out.println("Version: 10.0");
         System.out.println("System instantiated successfully");
         System.out.println();
 
-        String input = "A man, a plan, a canal: Panama";
+        String input = "madam";
 
-        // Normalize the string
-        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        boolean result = isPalindrome(input, 0, input.length() - 1);
 
-        boolean isPalindrome = true;
-
-        int left = 0;
-        int right = normalized.length() - 1;
-
-        while (left < right) {
-
-            if (normalized.charAt(left) != normalized.charAt(right)) {
-                isPalindrome = false;
-                break;
-            }
-
-            left++;
-            right--;
-        }
-
-        if (isPalindrome) {
-            System.out.println("The string is a normalized palindrome.");
+        if (result) {
+            System.out.println(input + " is a palindrome.");
         } else {
-            System.out.println("The string is not a normalized palindrome.");
+            System.out.println(input + " is not a palindrome.");
         }
     }
 }

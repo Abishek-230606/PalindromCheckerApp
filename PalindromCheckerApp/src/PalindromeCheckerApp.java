@@ -1,56 +1,62 @@
-/** MAIN CLASS - UseCase5PalindromeCheckerApp
+/**
+ * MAIN CLASS - PalindromeCheckerApp
+ *
+ * Use Case 7: Deque Based Optimized Palindrome Checker
+ *
+ * Description:
+ * This class validates whether a string is a palindrome using
+ * a Deque (Double Ended Queue) data structure.
+ *
+ * The application:
+ * - Adds characters to a deque
+ * - Removes characters from both ends
+ * - Compares them
+ * - Displays the result
+ *
+ * @Author Abishek JS
+ * @Version 7.0
+ */
 
-Use Case 6: Stack and queue Based Palindrome Checker
+import java.util.ArrayDeque;
+import java.util.Deque;
 
-* Description:
-        * This class validates a palindrome using a Stack
-* data structure which follows the LIFO principle.
-
-* At this stage, the application:
-        * - Pushes characters into a stack
-* - Pops them in reverse order
-* - Compares with original sequence
-* - Displays the result
-
-* This maps stack behavior to reversal Logic.
-
-* @Author Abishek JS
-* @version 6.0
-**/
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
 public class PalindromeCheckerApp {
+
     public static void main(String[] args) {
 
         System.out.println("WELCOME TO PALINDROME CHECKER APP MANAGEMENT SYSTEM");
-        System.out.println("version:6.0");
-        System.out.println("System instanced successful");
+        System.out.println("Version: 7.0");
+        System.out.println("System instantiated successfully");
         System.out.println();
 
-        String Palindrome = "racecar";
-        boolean flag=true;
-        Stack<Character> stack = new Stack<>();
-        Queue<Character> queue = new LinkedList<>();
+        String input = "refer";
 
-        for(int i=0;i<Palindrome.length();i++)
-        {
-            stack.push(Palindrome.charAt(i));
-            queue.add(Palindrome.charAt(i));
+        // Create deque
+        Deque<Character> deque = new ArrayDeque<>();
+
+        // Add characters to deque
+        for (char c : input.toCharArray()) {
+            deque.addLast(c);
         }
 
-        for(int i=0;i<Palindrome.length();i++)
-        {
-            char chs = stack.pop();
-            char chq = queue.remove();
+        boolean isPalindrome = true;
 
-            if(Palindrome.charAt(i)!=chs && Palindrome.charAt(i)!=chq)
-            {
-                flag = false;
+        // Compare first and last characters
+        while (deque.size() > 1) {
+            char first = deque.removeFirst();
+            char last = deque.removeLast();
+
+            if (first != last) {
+                isPalindrome = false;
+                break;
             }
         }
 
-        if (flag)  System.out.println("The string " + Palindrome + " is a palindrome.");
-        else System.out.println("The string " + Palindrome + " is not a palindrome .");
+        // Display result
+        if (isPalindrome) {
+            System.out.println(input + " is a palindrome.");
+        } else {
+            System.out.println(input + " is not a palindrome.");
+        }
     }
 }
